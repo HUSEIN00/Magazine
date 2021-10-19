@@ -1,0 +1,90 @@
+/*Задание на сегодняшнее практическое занятие:
+Создать класс Main, родительский класс Employee и три произвольных дочерних класса. 
+Продемонстрировать наследование полей и метода класса Employee его дочерними классами.
+Сохранить код на гитхаб-аккаунте. Мне потом скинуть ссылки на гитхаб репозиторий*/
+using System;
+
+namespace ConsoleApp5
+{
+    class Employee
+    {
+        public string name;
+        public int age;
+        public int salary;
+
+        public Employee(string name, int age, int salary)
+        {
+            this.name = name;
+            this.age = age;
+            this.salary = salary;
+        }
+
+        public virtual void Info()
+        {
+            Console.WriteLine($"Имя: {name}\nВозраст: {age}\nЗарплата: {salary}");
+        }
+    }
+    class Cashier : Employee
+    {
+        public int boxoffice;
+
+        public Cashier(string name, int age, int salary, int boxoffice) : base(name, age, salary)
+        {
+            this.boxoffice = boxoffice;
+        }
+        public override void Info()
+        {
+            Console.WriteLine("\nКассир: ");
+            base.Info();
+            Console.WriteLine($"Касса: {boxoffice}\n");
+        }
+    }
+    class Janitor : Employee
+    {
+        public string perimetr;
+
+        public Janitor(string name, int age, int salary, string perimetr) : base(name , age, salary)
+        {
+            this.perimetr = perimetr;
+        }
+
+        public override void Info()
+        {
+            Console.WriteLine($"\nОхранник: ");
+            base.Info();
+            Console.WriteLine($"Периметр: {perimetr}\n");
+        }
+    }
+
+    class Director : Employee
+    {
+        public string prof;
+
+        public Director(string name, int age, int salary, string prof) : base(name, age, salary)
+        {
+            this.prof = prof;
+        }
+
+        public override void Info()
+        {
+            Console.WriteLine($"\nДиректор");
+            base.Info();
+            Console.WriteLine($"Профессия: {prof}\n");
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Employee emp = new Employee("Том" , 30 , 15000);
+            emp.Info();
+            Cashier cas = new Cashier("Андрей", 26, 10000, 1);
+            cas.Info();
+            Janitor jan = new Janitor("Вулкан", 29, 35000, "Дверь");
+            jan.Info();
+            Director dir = new Director("Джотаро", 57, 190000, "Командовать");
+            dir.Info();
+
+        }
+    }
+}
